@@ -1,2 +1,2 @@
 # FastAPI-train
-uvicorn main:app for launch server
+`uvicorn main:app` for launch server
