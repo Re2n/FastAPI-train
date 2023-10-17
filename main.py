@@ -58,7 +58,7 @@ def get_clients():
     return clients
 
 
-@app.post('/clients/new_client')
+@app.put('/clients/{new_client}')
 def add_new_client(client: List[Client]):
     clients.extend(client)
     return {'status': 200, 'data': clients}
@@ -76,7 +76,7 @@ def update_client(client_id: int, new_name: str | None = None, new_surname: str 
     return {'status': 200, 'data': current_client}
 
 
-@app.post('/clients/delete_client')
+@app.delete('/clients/{delete_client}')
 def delete_client(client_id: int):
     current_client = list(filter(lambda client: client.get('id') == client_id, clients))[0]
     clients.remove(current_client)
@@ -85,10 +85,10 @@ def delete_client(client_id: int):
 
 @app.get('/cars', response_model=List[Car])
 def get_cars():
-    return cars
+    return {'status': 200, 'data': cars}
 
 
-@app.post('/cars/new_car')
+@app.put('/cars/{new_car}')
 def add_new_car(car: List[Car]):
     cars.extend(car)
     return {'status': 200, 'data': cars}
@@ -106,19 +106,19 @@ def update_car(car_id: int, new_brand: str | None = None, new_model: str | None 
     return {'status': 200, 'data': current_car}
 
 
-@app.post('/cars/delete_car')
+@app.delete('/cars/{delete_car}')
 def delete_car(car_id: int):
     current_car = list(filter(lambda car: car.get('id') == car_id, cars))[0]
     cars.remove(current_car)
-    return cars
+    return {'status': 200, 'data': cars}
 
 
 @app.get('/orders', response_model=List[Order])
 def get_orders():
-    return orders
+    return {'status': 200, 'data': orders}
 
 
-@app.post('/orders/new_order')
+@app.put('/orders/{new_order}')
 def add_new_order(order: List[Order]):
     orders.extend(order)
     return {'status': 200, 'data': orders}
@@ -136,11 +136,11 @@ def update_order(order_id: int, new_data: datetime | None = None, new_work_descr
     return {'status': 200, 'data': current_order}
 
 
-@app.post('/cars/order_car')
+@app.delete('/order/{delete_order}')
 def delete_order(order_id: int):
     current_order = list(filter(lambda order: order.get('id') == order_id, orders))[0]
     orders.remove(current_order)
-    return orders
+    return {'status': 200, 'data': orders}
 
 
 @app.get('/clients/cars')
